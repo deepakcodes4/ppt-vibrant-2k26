@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JanPramaan — Syntax Error | Vibrant 2K26</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#060b14;--bg2:#0b1424;--ink:#f4f7fb;--mut:#9fb0c6;--em:#34d399;--em2:#10b981;--line:rgba(148,170,200,.18);--warn:#fbbf24;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-snap-type:y proximity;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 clamp(15px,1.25vw,17px)/1.55 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;background-attachment:fixed}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(900px 500px at 80% -10%,rgba(16,185,129,.16),transparent 60%),radial-gradient(700px 500px at 0 100%,rgba(30,64,175,.2),transparent 60%),linear-gradient(rgba(6,11,20,.82),rgba(6,11,20,.9));z-index:-1}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;letter-spacing:-.02em;margin:0;line-height:1.05}
+h2{font-size:clamp(28px,4.4vw,56px);max-width:18ch}
+h3{font-size:clamp(17px,1.8vw,22px);line-height:1.2}
+p{margin:0}
+.s{min-height:100vh;min-height:100svh;scroll-snap-align:start;padding:clamp(76px,10vh,110px) clamp(18px,6vw,96px) clamp(60px,8vh,90px);display:flex;flex-direction:column;justify-content:center;gap:clamp(18px,3vh,32px);position:relative}
+.tag{color:var(--em);font-weight:600;font-size:13px;letter-spacing:.06em}
+.sub{color:var(--mut);max-width:62ch}
+.card{background:linear-gradient(160deg,rgba(18,30,52,.85),rgba(10,18,32,.85));border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.card h3{margin-bottom:8px}
+.card p,.card li{color:var(--mut);font-size:.95em}
+.card ul{margin:0;padding-left:1.1em}
+.grid{display:grid;gap:14px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.note{border-left:3px solid var(--em);padding:8px 14px;color:var(--ink);background:rgba(16,185,129,.07);border-radius:0 10px 10px 0;max-width:80ch}
+.scroll{overflow-x:auto}
+svg{display:block;width:100%;height:auto;max-width:1000px}
+svg text{font-family:"Instrument Sans",sans-serif;fill:var(--ink)}
+.nb{fill:#0e1a2e;stroke:rgba(148,170,200,.4);stroke-width:1.2}
+.ng{fill:rgba(16,185,129,.12);stroke:var(--em)}
+.nw{fill:rgba(251,191,36,.1);stroke:var(--warn)}
+.lt{font-size:15px;font-weight:600}.ls{font-size:11.5px;fill:var(--mut)}
+.ln{fill:none;stroke:var(--em);stroke-width:2;marker-end:url(#ar)}
+.ln.w{stroke:var(--warn);marker-end:url(#aw)}
+/* reveal system: elements animate only once a section is in view */
+.r{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease;transition-delay:calc(var(--d,0)*1s)}
+.in .r{opacity:1;transform:none}
+svg .r{transform:none}
+.dr{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .9s ease;transition-delay:calc(var(--d,0)*1s)}
+.in .dr{stroke-dashoffset:0}
+.flow{stroke-dasharray:6 8;animation:fl 1.2s linear infinite}
+@keyframes fl{to{stroke-dashoffset:-28}}
+/* nav */
+#bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--em2),var(--em));width:0;z-index:30;margin-top:env(safe-area-inset-top,0px)}
+header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:calc(12px + env(safe-area-inset-top,0px)) clamp(16px,4vw,40px) 12px;background:linear-gradient(rgba(6,11,20,.92),transparent);font-family:"Bricolage Grotesque",sans-serif;font-weight:700}
+header span{color:var(--mut);font:500 12px "Instrument Sans",sans-serif}
+#dots{position:fixed;right:clamp(8px,1.6vw,20px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:6px;z-index:20}
+#dots button{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--mut);background:none;padding:0;cursor:pointer;position:relative}
+#dots button.on{background:var(--em);border-color:var(--em);box-shadow:0 0 12px var(--em)}
+#dots button::after{content:attr(data-t);position:absolute;right:20px;top:50%;transform:translateY(-50%);white-space:nowrap;font-size:12px;background:var(--bg2);border:1px solid var(--line);padding:3px 8px;border-radius:6px;opacity:0;pointer-events:none;transition:.2s}
+#dots button:hover::after,#dots button:focus-visible::after{opacity:1}
+.ctl{position:fixed;left:clamp(12px,3vw,32px);bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;z-index:20;align-items:center;font-size:13px;color:var(--mut)}
+.ctl button{background:rgba(11,20,36,.9);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer;font:inherit}
+.ctl button:hover{border-color:var(--em)}
+:focus-visible{outline:2px solid var(--em);outline-offset:3px}
+/* hero */
+.hero h1{font-size:clamp(52px,12vw,150px);font-weight:800;line-height:.9}
+.hero h1 .l{display:inline-block;opacity:0;transform:translateY(40px);filter:blur(8px);transition:all .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i)*.06s)}
+.in h1 .l{opacity:1;transform:none;filter:none}
+.vib{display:inline-block;border:1px solid var(--em);color:var(--em);padding:6px 16px;border-radius:99px;font-weight:600;letter-spacing:.14em;font-size:clamp(13px,1.6vw,18px);align-self:flex-start;background:rgba(16,185,129,.08)}
+.tl{color:var(--em);font:600 clamp(16px,2.2vw,26px)/1.3 "Bricolage Grotesque",sans-serif}
+.team{display:flex;flex-wrap:wrap;gap:8px}
+.team b{font-weight:600;border:1px solid var(--line);padding:5px 12px;border-radius:99px;background:rgba(18,30,52,.7);font-size:.92em}
+.team b.lead{border-color:var(--em);color:var(--em)}
+.sky{position:absolute;left:0;right:0;bottom:0;opacity:.8;pointer-events:none;z-index:-1}
+.sky svg{max-width:none;width:100%}
+.sky path{fill:none;stroke:var(--em);stroke-width:1.4;opacity:.55}
+/* problem */
+.morph{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.pill{font:700 clamp(18px,2.4vw,28px) "Bricolage Grotesque";padding:10px 26px;border-radius:99px;border:1.5px solid var(--warn);color:var(--warn);position:relative}
+.in .pill{animation:strike 1s 1s forwards}
+@keyframes strike{to{opacity:.4;border-color:var(--mut);color:var(--mut);text-decoration:line-through}}
+.steps{display:flex;gap:0;flex-wrap:wrap;flex:1;min-width:280px}
+.stp{flex:1 1 110px;position:relative;padding:22px 6px 0;text-align:center;font-size:.9em;font-weight:600}
+.stp::before{content:"";position:absolute;top:6px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--em);box-shadow:0 0 12px var(--em);z-index:1}
+.stp::after{content:"";position:absolute;top:12px;left:50%;width:100%;height:2px;background:var(--em);opacity:.5}
+.stp:last-child::after{display:none}
+.usp{font:800 clamp(28px,5.2vw,68px)/1.02 "Bricolage Grotesque";letter-spacing:-.03em;max-width:16ch}
+.usp em{font-style:normal;color:var(--em);display:block}
+table{border-collapse:separate;border-spacing:0}
+.refs a{color:var(--em);word-break:break-all}
+.refs .card{display:flex;flex-direction:column;gap:4px}
+.refs h3{font-size:16px}
+.close{font:800 clamp(30px,5vw,64px)/1.05 "Bricolage Grotesque";max-width:20ch;letter-spacing:-.03em}
+.step-n{font:800 28px "Bricolage Grotesque";color:var(--em)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.r,.hero h1 .l{opacity:1!important;transform:none!important;filter:none!important}.dr{stroke-dashoffset:0!important}.pill{opacity:.4}}
+@media(max-width:640px){#dots{display:none}.ctl span{display:none}}
+</style></head><body>
+<div id="bar"></div>
+<header><div>JanPramaan</div><span>Syntax Error · Vibrant 2K26</span></header>
+<nav id="dots" aria-label="Sections"></nav>
+<div class="ctl"><button id="pv" aria-label="Previous section">←</button><button id="nx" aria-label="Next section">→</button><button id="fs">Fullscreen</button><span id="ct">1 / 8</span></div>
+
+<!-- 1 -->
+<section class="s hero" data-t="Title & team" id="s1">
+<div class="sky"><svg viewBox="0 0 1200 220" preserveAspectRatio="none" aria-hidden="true"><path class="dr" pathLength="1" style="--d:.4" d="M0 200H80V120H130V80H190V150H240V60H300V110H350V30H410V130H470V90H520V170H600V70H660V120H720V40H790V140H850V100H910V160H980V60H1050V130H1110V90H1200"/><path class="dr" pathLength="1" style="--d:1" d="M0 215H1200" /></svg></div>
+<span class="vib r">VIBRANT 2K26 · ROUND 2 PROPOSAL</span>
+<h1 aria-label="JanPramaan" id="ttl"></h1>
+<p class="tl r" style="--d:.9">Beyond Resolved. Accountable by Evidence.</p>
+<p class="sub r" style="--d:1.05">A complaint should not disappear into a status label. JanPramaan connects every update, repair evidence and follow-up in one transparent issue history.</p>
+<div class="r" style="--d:1.2"><p style="font-weight:600">Team Syntax Error</p><p class="sub" style="margin-bottom:10px">GL Bajaj Institute of Technology and Management, Greater Noida</p>
+<div class="team"><b class="lead">Deepak Yadav — Team Leader</b><b>Vradul Chaudhary</b><b>Prasant</b><b>Ayush Dwivedi</b><b>Yuvraj Singh</b></div></div>
+</section>
+
+<!-- 2 -->
+<section class="s" data-t="Problem & solution" id="s2">
+<span class="tag r">PROBLEM STATEMENT &amp; PROPOSED SOLUTION</span>
+<h2 class="r" style="--d:.1">Citizens need a clearer view of complaint progress</h2>
+<p class="sub r" style="--d:.2">The issue is not only how to file a complaint; it is how to follow the work through to a reliable outcome.</p>
+<div class="morph r" style="--d:.4"><div class="pill">Resolved</div><div class="steps" role="list">
+<div class="stp r" style="--d:2">Submitted</div><div class="stp r" style="--d:2.2">Assigned</div><div class="stp r" style="--d:2.4">In progress</div><div class="stp r" style="--d:2.6">Evidence added</div><div class="stp r" style="--d:2.8">Citizen review</div><div class="stp r" style="--d:3">Follow-up</div></div></div>
+<div class="grid g3">
+<div class="card r" style="--d:.5"><h3>Current experience can be fragmented</h3><ul><li>Status updates may be brief</li><li>Repair evidence may be hard to compare with the original report</li><li>Repeat issues may be reported as new tickets</li><li>Citizens may not know what happens next</li></ul></div>
+<div class="card r" style="--d:.65"><h3>What JanPramaan adds</h3><ul><li>One progress timeline from submission to follow-up</li><li>Updates from the responsible department</li><li>Original and completion evidence in one record</li><li>Citizen feedback or dispute after a repair claim</li></ul></div>
+<div class="card r" style="--d:.8"><h3>The intended outcome</h3><p>Citizens can see who is handling the issue, what stage it is at, what evidence was submitted and whether a repeat report has appeared.</p></div></div>
+<p class="note r" style="--d:.9">Key principle: show progress transparently, but label evidence as “submitted”, “under review” or “verified”—not all as automatically verified.</p>
+</section>
+
+<!-- 3 -->
+<section class="s" data-t="Existing solutions" id="s3">
+<span class="tag r">EXISTING SOLUTIONS &amp; DIFFERENTIATION</span>
+<h2 class="r" style="--d:.1">Existing platforms already track complaints—so what is our gap?</h2>
+<p class="sub r" style="--d:.2">We should not claim that tracking is new. JanPramaan proposes a focused layer for progress visibility, evidence history and repeat-issue follow-up.</p>
+<div class="grid g3" id="cmp"></div>
+<p class="note r" style="--d:1.1">Differentiation to validate: one issue record + full progress timeline + repair evidence + repeat-issue follow-up in one simple interface.</p>
+<p class="ls" style="color:var(--mut)">Sources: CPGRAMS, Swachh City / Swachhata, Election Commission of India cVIGIL (links in section 8).</p>
+</section>
+
+<!-- 4 -->
+<section class="s" data-t="Innovation / USP" id="s4">
+<span class="tag r">INNOVATION / USP</span>
+<h1 class="usp"><span class="r" style="--d:.1">One complaint.</span><em class="r" style="--d:.5">One live timeline.</em><span class="r" style="--d:.9">One evidence trail.</span></h1>
+<p class="sub r" style="--d:1.1">JanPramaan does not stop at “Resolved”: it shows the complaint journey, records the evidence behind the repair, and links the same problem if it returns.</p>
+<div style="position:relative" class="grid g3">
+<div class="card r" style="--d:1.3"><div class="step-n">1</div><h3>Live Progress Timeline</h3><p>Submitted → assigned → work in progress → evidence added → citizen review → follow-up. Each update has a time and responsible role.</p></div>
+<div class="card r" style="--d:1.6"><div class="step-n">2</div><h3>Evidence-linked Closure</h3><p>Keep the original report beside the repair photo and metadata. Citizens can flag “not fixed” or “evidence unclear”.</p></div>
+<div class="card r" style="--d:1.9"><div class="step-n">3</div><h3>Repeat-Issue Memory</h3><p>Link likely repeat reports to the same location and issue history; flag recurring failures for human review.</p></div></div>
+<div class="grid g3"><p class="r" style="--d:2.1"><b>Citizens</b> know what stage their complaint is at.</p><p class="r" style="--d:2.2"><b>Departments</b> can see evidence and unresolved follow-up.</p><p class="r" style="--d:2.3"><b>Ward-level reports</b> can reveal recurring problem locations.</p></div>
+<p class="note r" style="--d:2.4">Honest claim: the combination is our proposed differentiation; it must be tested against existing municipal workflows before claiming exclusivity.</p>
+</section>
+
+<!-- 5 -->
+<section class="s" data-t="Process flowchart" id="s5">
+<span class="tag r">PROCESS FLOWCHART</span>
+<h2 class="r" style="--d:.1">From complaint submission to follow-up</h2>
+<p class="sub r" style="--d:.2">The citizen and department see the same issue history, with clear stages and evidence status.</p>
+<div class="scroll"><svg viewBox="0 0 1000 520" role="img" aria-label="Flowchart: Citizen reports, system creates ID, department updates, evidence submitted, citizen reviews, evidence review branching to evidence-supported, human review, and repeat issue linking.">
+<defs><marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#34d399"/></marker><marker id="aw" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#fbbf24"/></marker></defs>
+<g id="fl"></g></svg></div>
+<p class="ls r" style="--d:3.4;font-size:13px">Progress labels: Submitted • Assigned • In progress • Evidence submitted • Under review • Evidence-supported • Reopened / repeat issue</p>
+</section>
+
+<!-- 6 -->
+<section class="s" data-t="Architecture & stack" id="s6">
+<span class="tag r">SYSTEM ARCHITECTURE</span>
+<h2 class="r" style="--d:.1">Simple web architecture for a working prototype</h2>
+<p class="sub r" style="--d:.2">Proposed architecture; components can be implemented with common web-development tools.</p>
+<div class="scroll"><svg viewBox="0 0 1000 400" role="img" aria-label="Architecture: citizen portal and department dashboard connect to the backend API, which connects to database, file storage, notification service and AI-assisted matching.">
+<defs><marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#34d399"/></marker></defs><g id="ar6"></g></svg></div>
+<div class="grid g4">
+<div class="card r" style="--d:1.8"><h3>React</h3><p>Builds the citizen portal and department dashboard.</p></div>
+<div class="card r" style="--d:1.95"><h3>FastAPI</h3><p>Workflow and APIs: auth, roles, status updates, notifications.</p></div>
+<div class="card r" style="--d:2.1"><h3>Supabase</h3><p>Issues and timeline (PostgreSQL), plus file storage for photos.</p></div>
+<div class="card r" style="--d:2.25"><h3>Optional AI</h3><p>Similarity flags for likely duplicates. Human review decides.</p></div></div>
+<p class="note r" style="--d:2.4">MVP choice: React + FastAPI + Supabase. AI matching is optional; human review controls disputed evidence and closure.</p>
+</section>
+
+<!-- 7 -->
+<section class="s" data-t="Feasibility & impact" id="s7">
+<span class="tag r">FEASIBILITY, IMPACT &amp; SCALABILITY</span>
+<h2 class="r" style="--d:.1">Start with one ward and measure whether the workflow helps</h2>
+<p class="sub r" style="--d:.2">No custom hardware or government integration is required to demonstrate the concept.</p>
+<div class="grid g3">
+<div class="card r" style="--d:.3"><h3>MVP scope</h3><ul><li>Complaint form + tracking ID</li><li>Progress timeline</li><li>Department update screen</li><li>Evidence upload + review</li><li>Repeat-issue history</li></ul></div>
+<div class="card r" style="--d:.45"><h3>Risks &amp; safeguards</h3><ul><li>Fake/old photos → metadata checks</li><li>False match → human confirmation</li><li>Privacy → access controls and redaction</li><li>No API → simulated department dashboard</li></ul></div>
+<div class="card r" style="--d:.6"><h3>Practical rollout</h3><ol style="margin:0;padding-left:1.2em;color:var(--mut)"><li>Build a sample prototype</li><li>Test one category (potholes / garbage)</li><li>Pilot with a campus or ward partner</li><li>Integrate only with permission</li></ol></div></div>
+<h3 class="r" style="--d:.8">Proposed pilot metrics</h3>
+<div class="grid g4">
+<div class="card r" style="--d:.9"><h3>Progress visibility</h3><p>% complaints with stage updates</p></div>
+<div class="card r" style="--d:1"><h3>Evidence quality</h3><p>% closure claims with usable proof</p></div>
+<div class="card r" style="--d:1.1"><h3>Repeat issue rate</h3><p>Confirmed repeat reports within 30 days</p></div>
+<div class="card r" style="--d:1.2"><h3>Review accuracy</h3><p>% flags confirmed by human reviewers</p></div></div>
+<p class="sub r" style="--d:1.3">Potential impact: citizens know the current stage; departments get a clearer evidence trail; repeat locations become easier to spot; scale from ward → municipality → partner networks.</p>
+<p class="note r" style="--d:1.4">All benefits are expected outcomes, not measured results; a pilot is needed to establish effectiveness.</p>
+</section>
+
+<!-- 8 -->
+<section class="s" data-t="References & closing" id="s8">
+<span class="tag r">RESEARCH &amp; REFERENCES</span>
+<h2 class="r" style="--d:.1">Existing services and sources used to shape the proposal</h2>
+<p class="sub r" style="--d:.2">The comparison is based on public descriptions of current services; the JanPramaan differentiation remains a hypothesis to validate.</p>
+<div class="grid g3 refs" id="refs"></div>
+<p class="ls r" style="--d:1.4;font-size:13px;color:var(--mut)">No fabricated statistics or performance claims are used. All pilot metrics are proposed and must be measured.</p>
+<div style="margin-top:clamp(16px,4vh,40px)"><p class="close r" style="--d:1.6">Beyond Resolved. Accountable by Evidence.</p>
+<p class="r" style="--d:1.9;margin-top:14px"><b style="color:var(--em)">JanPramaan</b> · Team Syntax Error · GL Bajaj Institute of Technology and Management, Greater Noida</p>
+<p class="vib r" style="--d:2.1;margin-top:12px">VIBRANT 2K26</p></div>
+</section>
+
+<script>
+const $=s=>document.querySelector(s),NS='http://www.w3.org/2000/svg';
+// hero title
+$('#ttl').innerHTML=[...'JanPramaan'].map((c,i)=>`<span class="l" style="--i:${i}" aria-hidden="true">${c}</span>`).join('');
+// comparison
+const cmp=[['CPGRAMS','Register, track status, give feedback and appeal.','Broad government grievance workflow; not designed solely around local recurring infrastructure issues.','Issue-level history linking original report, repair evidence and repeat reports.'],
+['Swachhata / Swachh City','Photo-based sanitation complaints, location, status updates and citizen feedback.','Focused on sanitation / municipal workflow; do not assume it lacks verification features.','Pilot a cross-stage record for selected civic categories with a repeat-issue history.'],
+['cVIGIL','Report election-code violations and track complaint progress.','Specific to election violations, not general civic maintenance.','General civic issue workflow with repair evidence and follow-up window.']];
+$('#cmp').innerHTML=cmp.map((c,i)=>`<div class="card r" style="--d:${.4+i*.25}"><h3>${c[0]}</h3><p><b style="color:var(--ink)">Already does:</b> ${c[1]}</p><p style="margin-top:6px"><b style="color:var(--ink)">Scope:</b> ${c[2]}</p><p style="margin-top:8px;border-top:1px solid var(--line);padding-top:8px;color:var(--em)"><b>JanPramaan’s proposed focus:</b> ${c[3]}</p></div>`).join('');
+// refs
+const refs=[['CPGRAMS — official grievance portal','Registration, status tracking, feedback and appeal.','https://pgportal.gov.in/'],
+['National Government Services Portal — CPGRAMS status','Explains status and progress tracking using grievance details.','https://services.india.gov.in/service/detail/track-the-status-of-complaints-on-cpgrams-1'],
+['Swachh City / Swachhata platform','Photo-based municipal sanitation complaints, location, status updates and citizen feedback.','https://dashboard.swachh.city/'],
+['Election Commission of India — cVIGIL','Complaint submission and progress tracking for election-code violations.','https://www.eci.gov.in/cvigil-app'],
+['SIH winning PPT reference','Used as a structural reference for problem, solution, USP, technical approach, feasibility, impact and references—not copied content.','https://www.slideshare.net/slideshow/smart-india-hackothaon-winning-ppt-for-the-2026/284297693'],
+['UN Sustainable Development Goal 16','Policy context: effective, accountable and inclusive institutions.','https://sdgs.un.org/goals/goal16']];
+$('#refs').innerHTML=refs.map((r,i)=>`<div class="card r" style="--d:${.3+i*.15}"><h3>${r[0]}</h3><p>${r[1]}</p><a href="${r[2]}" target="_blank" rel="noopener noreferrer">${r[2]}</a></div>`).join('');
+// svg helpers
+const esc=t=>t;
+function node(x,y,w,h,t,s,cls,d,id){return `<g class="r ${id||''}" style="--d:${d}"><rect class="${cls||'nb'}" x="${x}" y="${y}" width="${w}" height="${h}" rx="12"/><text class="lt" x="${x+w/2}" y="${y+h/2-(s?4:-5)}" text-anchor="middle">${t}</text>${s?`<text class="ls" x="${x+w/2}" y="${y+h/2+15}" text-anchor="middle">${s}</text>`:''}</g>`}
+function path(d,delay,cls){return `<path class="ln dr ${cls||''}" pathLength="1" style="--d:${delay}" d="${d}"/>`}
+// flowchart
+const f=[['Citizen reports','Text + photo + location'],['System creates ID','Category + timestamp'],['Department updates','Assigned / in progress'],['Evidence submitted','Photo + work note'],['Citizen reviews','Fixed / not fixed / unsure']];
+let h='';
+f.forEach((n,i)=>{h+=node(15+i*200,30,170,76,n[0],n[1],'nb',.5+i*.5);if(i<4)h+=path(`M${185+i*200} 68H${215+i*200}`,.85+i*.5)});
+h+=path('M900 106V160H500V196',3)+node(390,200,220,64,'Evidence review','Human + system check','ng',3.4);
+h+=path('M500 264V290H160V328',4.1)+path('M500 264V328',4.2,'w')+path('M500 264V290H840V328',4.3);
+h+=`<text class="ls r" style="--d:4.1" x="160" y="284" text-anchor="middle">If evidence is sufficient</text><text class="ls r" style="--d:4.2" x="500" y="284" text-anchor="middle">If unclear or disputed</text><text class="ls r" style="--d:4.3" x="840" y="284" text-anchor="middle">If issue returns</text>`;
+h+=node(20,332,280,70,'Evidence supported','Mark “evidence-supported”','ng',4.5)+node(360,332,280,70,'Human review required','Request more proof','nw',4.6)+node(700,332,280,70,'Repeat report linked','Same issue ID','ng',4.7);
+h+=path('M160 402V448',5.1)+node(20,452,280,52,'Follow-up','Scheduled check',' nb',5.3);
+h+=path('M840 402V448',5.2)+node(700,452,280,52,'Civic Issue Record','One history, reopened','nb',5.4);
+h+=path('M500 402V430H670V112',5.5,'w').replace('ln dr','ln dr flowdash');
+h+=`<text class="ls r" style="--d:5.6" x="510" y="424">more proof → back to Repair Evidence</text>`;
+$('#fl').innerHTML=h;
+// architecture
+let a='';
+a+=node(20,60,210,70,'Citizen portal','React',null,.5).replace('class="lt"','class="lt"')+node(20,250,210,70,'Department dashboard','React',null,.7);
+a+=node(390,110,220,180,'Backend API','',null,1,'');
+a+=`<g class="r" style="--d:1.1"><text class="ls" x="500" y="205" text-anchor="middle">Auth • roles • status updates</text><text class="ls" x="500" y="225" text-anchor="middle">Audit &amp; access control</text><text class="ls" x="500" y="245" text-anchor="middle">FastAPI</text></g>`;
+const R=[['Database','Users • issue IDs • timeline',10],['Evidence storage','Original + repair photos',110],['Notification service','Email / SMS / in-app',210],['AI-assisted matching','Optional similarity flags',310]];
+R.forEach((r,i)=>{a+=node(760,r[2]+10,220,66,r[0],r[1],i==3?'nw':'ng',1.6+i*.2)+path(`M610 200C690 200 690 ${r[2]+43} 758 ${r[2]+43}`,1.4+i*.2).replace('ln dr','ln dr flow')});
+a+=path('M230 95C310 95 310 170 388 170',.9).replace('ln dr','ln dr flow')+path('M230 285C310 285 310 230 388 230',1).replace('ln dr','ln dr flow');
+$('#ar6').innerHTML=a;
+// navigation
+const S=[...document.querySelectorAll('.s')],dots=$('#dots');
+S.forEach((s,i)=>{const b=document.createElement('button');b.dataset.t=`${i+1}. ${s.dataset.t}`;b.ariaLabel=b.dataset.t;b.onclick=()=>go(i);dots.append(b)});
+let cur=0;
+const go=i=>{i=Math.max(0,Math.min(S.length-1,i));S[i].scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'})};
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');cur=S.indexOf(e.target);[...dots.children].forEach((d,j)=>d.classList.toggle('on',j==cur));$('#ct').textContent=`${cur+1} / 8`}}),{threshold:.45});
+S.forEach(s=>io.observe(s));
+addEventListener('scroll',()=>{$('#bar').style.width=(scrollY/(document.documentElement.scrollHeight-innerHeight)*100)+'%'},{passive:true});
+$('#pv').onclick=()=>go(cur-1);$('#nx').onclick=()=>go(cur+1);
+$('#fs').onclick=()=>{try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}catch(e){}};
+addEventListener('keydown',e=>{const k=e.key;if(['ArrowDown','ArrowRight','PageDown'].includes(k)){e.preventDefault();go(cur+1)}else if(['ArrowUp','ArrowLeft','PageUp'].includes(k)){e.preventDefault();go(cur-1)}else if(k==='Home')go(0);else if(k==='End')go(7);else if(k==='f'||k==='F')$('#fs').click();else if(/^[1-8]$/.test(k))go(+k-1)});
+</script></body></html>
